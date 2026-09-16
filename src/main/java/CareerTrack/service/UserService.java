@@ -70,6 +70,12 @@ public class UserService {
     // Create user
     public User createUser(User user) {
 
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException(
+                    "Email already registered. Please use another email."
+            );
+        }
+
         user.setPassword(
                 passwordEncoder.encode(
                         user.getPassword()

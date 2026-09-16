@@ -1,0 +1,899 @@
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+    color: #1e293b;
+}
+
+
+/* =========================
+   DASHBOARD CONTAINER
+========================= */
+
+.dashboard-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0 60px;
+}
+
+
+/* =========================
+   DASHBOARD HEADER
+========================= */
+
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.dashboard-header > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.dashboard-container h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+.welcome-text {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #64748b;
+    font-size: 16px;
+}
+
+
+/* =========================
+   LOGOUT BUTTON
+========================= */
+
+.logout-button {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-top: 0;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #dc2626;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   USER PROFILE
+========================= */
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ede9fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile-item strong {
+    color: #334155;
+    min-width: 60px;
+}
+
+.profile-item span {
+    color: #64748b;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 24px 18px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+.stat-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #4f46e5;
+}
+
+.stat-card p {
+    margin: 8px 0 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================
+   COMMON SECTIONS
+========================= */
+
+.progress-section,
+.activity-section,
+.interviews-section,
+.analytics-section {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #1e293b;
+}
+
+.section-header p {
+    margin: 7px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   CAREER PROGRESS
+========================= */
+
+.progress-percentage {
+    flex-shrink: 0;
+}
+
+.progress-percentage span {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+.progress-bar-container {
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            #4f46e5,
+            #7c3aed
+    );
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+.add-button {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 18px;
+    background: #4f46e5;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-button:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   APPLICATION TOOLS
+========================= */
+
+.application-tools {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.application-tools input,
+.application-tools select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: white;
+    color: #1e293b;
+    font-size: 14px;
+    outline: none;
+}
+
+.application-tools input:focus,
+.application-tools select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+
+/* =========================
+   APPLICATION LIST
+========================= */
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.application-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    background: #ffffff;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.application-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.application-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.application-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.application-card .job-title {
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   STATUS BADGES
+========================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-applied {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-assessment {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.status-interview {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-offer {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =========================
+   APPLICATION DETAILS
+========================= */
+
+.application-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    margin-top: 18px;
+}
+
+.application-detail {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.application-detail strong {
+    color: #334155;
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+.application-notes {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   JOB LINK
+========================= */
+
+.job-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.job-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   APPLICATION ACTIONS
+========================= */
+
+.application-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.edit-button,
+.delete-button {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-button {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.edit-button:hover {
+    background: #c7d2fe;
+}
+
+.delete-button {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.delete-button:hover {
+    background: #fecaca;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 35px 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   APPLICATION FORM
+========================= */
+
+.application-form-container {
+    margin-top: 25px;
+    padding: 28px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.form-header {
+    margin-bottom: 22px;
+}
+
+.form-header h2 {
+    margin: 0;
+    font-size: 21px;
+    color: #1e293b;
+}
+
+.form-header p {
+    margin: 7px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+#applicationForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+#applicationForm input,
+#applicationForm select,
+#applicationForm textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    background: white;
+    color: #1e293b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#applicationForm textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+#applicationForm input:focus,
+#applicationForm select:focus,
+#applicationForm textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+
+/* =========================
+   SAVE APPLICATION BUTTON
+========================= */
+
+.save-application-button {
+    grid-column: 1 / -1;
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    background: #4f46e5;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-application-button:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   APPLICATION MESSAGE
+========================= */
+
+#applicationMessage {
+    margin: 15px 0 0;
+    font-size: 14px;
+}
+
+
+/* =========================
+   UPCOMING INTERVIEWS
+========================= */
+
+.upcoming-interviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.interview-card {
+    padding: 18px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.interview-card h3 {
+    margin: 0 0 6px;
+    color: #1e293b;
+    font-size: 17px;
+}
+
+.interview-card p {
+    margin: 5px 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.interview-date {
+    font-weight: 600;
+    color: #4f46e5 !important;
+}
+
+
+/* =========================
+   ANALYTICS
+========================= */
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .application-tools {
+        grid-template-columns: 1fr;
+    }
+
+    #applicationForm {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .save-application-button {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .dashboard-container {
+        width: 92%;
+        padding: 30px 0 45px;
+    }
+
+
+    /* Header */
+
+    .dashboard-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 28px;
+    }
+
+    .dashboard-header > div {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .dashboard-container h1 {
+        font-size: 30px;
+    }
+
+    .welcome-text {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .logout-button {
+        flex-shrink: 0;
+        margin-left: auto;
+        margin-top: 0;
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+
+
+    /* User Profile */
+
+    .profile-section {
+        margin-bottom: 25px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .profile-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
+
+    /* Statistics */
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+
+    /* Sections */
+
+    .progress-section,
+    .activity-section,
+    .interviews-section,
+    .analytics-section {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+
+    /* Section headers */
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .progress-percentage {
+        align-self: flex-end;
+    }
+
+
+    /* Application cards */
+
+    .application-card-header {
+        flex-direction: column;
+    }
+
+    .application-details {
+        grid-template-columns: 1fr;
+    }
+
+    .application-actions {
+        flex-wrap: wrap;
+    }
+
+
+    /* Form */
+
+    .application-form-container {
+        padding: 20px;
+    }
+
+    #applicationForm {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .save-application-button {
+        grid-column: auto;
+    }
+
+
+    /* Chart */
+
+    .chart-container {
+        height: 280px;
+    }
+    /* =========================
+   LOADING STATE
+========================= */
+
+    .loading-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #64748b;
+    }
+
+    .loading-spinner {
+        width: 36px;
+        height: 36px;
+        margin: 0 auto 15px;
+        border: 4px solid #e2e8f0;
+        border-top-color: #4f46e5;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    /* =========================
+   ERROR STATE
+========================= */
+
+    .error-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #64748b;
+    }
+
+    .error-icon {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .error-state h3 {
+        margin: 0 0 8px;
+        color: #334155;
+    }
+
+    .error-state p {
+        margin: 0 0 20px;
+        font-size: 14px;
+    }
+
+    #retryButton {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #4f46e5;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    #retryButton:hover {
+        background: #4338ca;
+        transform: translateY(-1px);
+    }
+
+}

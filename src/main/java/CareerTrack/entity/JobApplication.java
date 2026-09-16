@@ -1,7 +1,7 @@
 package CareerTrack.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
@@ -23,11 +23,13 @@ public class JobApplication {
     private User user;
 
     @NotBlank(message = "Company name is required")
+    @Column(nullable = false)
     private String companyName;
 
     @NotBlank(message = "Job title is required")
+    @Column(nullable = false)
     private String jobTitle;
-
+    @NotNull(message = "Application status is required")
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(nullable = false)
@@ -44,7 +46,7 @@ public class JobApplication {
 
     @Column(length = 2000)
     private String notes;
-
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
 

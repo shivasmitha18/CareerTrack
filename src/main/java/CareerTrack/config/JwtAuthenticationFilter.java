@@ -3,10 +3,14 @@ package CareerTrack.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,15 +22,20 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter
+        extends OncePerRequestFilter {
 
-    private static final String SECRET_KEY =
-            "CareerTrackSecretKeyForJwtAuthentication2026Secure";
+    @Value("${jwt.secret}")
+    private String secretKey;
 
-    private final SecretKey key =
-            io.jsonwebtoken.security.Keys.hmacShaKeyFor(
-                    SECRET_KEY.getBytes(StandardCharsets.UTF_8)
-            );
+
+    private SecretKey getSigningKey() {
+
+        return Keys.hmacShaKeyFor(
+                secretKey.getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
 
     @Override
     protected void doFilterInternal(
@@ -35,37 +44,62 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
+
         String authorizationHeader =
                 request.getHeader("Authorization");
 
-        // Diagnostic: check whether Postman sends the JWT
+
         System.out.println(
-                "Authorization Header: " + authorizationHeader
+                "JWT FILTER - Request: "
+                        + request.getRequestURI()
         );
 
-        // No JWT token
-        if (authorizationHeader == null ||
-                !authorizationHeader.startsWith("Bearer ")) {
+        System.out.println(
+                "JWT FILTER - Authorization: "
+                        + (authorizationHeader != null
+                        ? "Bearer token received"
+                        : "NO TOKEN")
+        );
 
-            filterChain.doFilter(request, response);
+
+        // No token
+        if (
+                authorizationHeader == null ||
+                        !authorizationHeader.startsWith("Bearer ")
+        ) {
+
+            filterChain.doFilter(
+                    request,
+                    response
+            );
+
             return;
         }
 
-        // Extract JWT token
-        String token = authorizationHeader.substring(7);
+
+        String token =
+                authorizationHeader.substring(7);
+
 
         try {
 
-            // Validate and parse JWT
-            Jws<Claims> claims = Jwts.parser()
-                    .verifyWith(key)
-                    .build()
-                    .parseSignedClaims(token);
+            Jws<Claims> claims =
+                    Jwts.parser()
+                            .verifyWith(getSigningKey())
+                            .build()
+                            .parseSignedClaims(token);
 
-            // Get email from JWT subject
-            String email = claims.getPayload().getSubject();
 
-            // Create authenticated user
+            String email =
+                    claims.getPayload().getSubject();
+
+
+            System.out.println(
+                    "JWT FILTER - Token valid for: "
+                            + email
+            );
+
+
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
                             email,
@@ -73,20 +107,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                             Collections.emptyList()
                     );
 
-            // Store authentication in Spring Security context
-            SecurityContextHolder.getContext()
-                    .setAuthentication(authentication);
+
+            SecurityContextHolder
+                    .getContext()
+                    .setAuthentication(
+                            authentication
+                    );
+
 
         } catch (Exception exception) {
 
-            // Invalid or expired JWT
+            System.out.println(
+                    "JWT FILTER - INVALID TOKEN: "
+                            + exception.getMessage()
+            );
+
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
+
             return;
         }
 
-        // Continue the request
-        filterChain.doFilter(request, response);
+
+        filterChain.doFilter(
+                request,
+                response
+        );
     }
 }

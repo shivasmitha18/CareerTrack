@@ -5,7 +5,7 @@ import CareerTrack.dto.JobApplicationResponse;
 import CareerTrack.entity.ApplicationStatus;
 import CareerTrack.entity.JobApplication;
 import CareerTrack.service.JobApplicationService;
-
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/applications")
+@SecurityRequirement(name = "bearerAuth")
 public class JobApplicationController {
 
     private final JobApplicationService jobApplicationService;
@@ -251,12 +252,14 @@ public class JobApplicationController {
                                 userId,
                                 application);
 
+        JobApplicationResponse response =
+                jobApplicationService
+                        .convertToResponse(
+                                savedApplication);
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(
-                        jobApplicationService
-                                .convertToResponse(
-                                        savedApplication));
+                .body(response);
     }
 
     // Update application
@@ -272,10 +275,12 @@ public class JobApplicationController {
                                 id,
                                 applicationDetails);
 
-        return ResponseEntity.ok(
+        JobApplicationResponse response =
                 jobApplicationService
                         .convertToResponse(
-                                updatedApplication));
+                                updatedApplication);
+
+        return ResponseEntity.ok(response);
     }
 
     // Delete application
@@ -286,7 +291,9 @@ public class JobApplicationController {
 
         jobApplicationService.deleteApplication(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
     // Get upcoming interviews

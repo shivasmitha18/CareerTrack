@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerTrack Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- =========================
+         Header
+    ========================== -->
+
+    <header class="dashboard-header">
+
+        <div>
+            <h1>CareerTrack</h1>
+
+            <p class="welcome-text">
+                Welcome to your career dashboard
+            </p>
+        </div>
+
+        <button
+                type="button"
+                id="logoutButton"
+                class="logout-button">
+            Logout
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         User Profile
+    ========================== -->
+
+    <section class="profile-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Your Profile</h2>
+
+                <p>
+                    Your CareerTrack account details.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+            <div class="profile-details">
+
+                <div class="profile-item">
+
+                    <strong>Name</strong>
+
+                    <span id="profileName">
+                        Loading...
+                    </span>
+
+                </div>
+
+                <div class="profile-item">
+
+                    <strong>Email</strong>
+
+                    <span id="profileEmail">
+                        Loading...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Statistics
+    ========================== -->
+
+    <section class="stats-container">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📋</div>
+
+            <h2 id="totalApplications">0</h2>
+
+            <p>Total Applications</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📤</div>
+
+            <h2 id="appliedApplications">0</h2>
+
+            <p>Applied</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🎯</div>
+
+            <h2 id="interviewApplications">0</h2>
+
+            <p>Interviews</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🎉</div>
+
+            <h2 id="offerApplications">0</h2>
+
+            <p>Offers</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">❌</div>
+
+            <h2 id="rejectedApplications">0</h2>
+
+            <p>Rejected</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Career Progress
+    ========================== -->
+
+    <section class="progress-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Your Career Progress</h2>
+
+                <p>
+                    Keep applying and keep moving forward.
+                </p>
+
+            </div>
+
+            <div class="progress-percentage">
+
+                <span id="progressPercentage">
+                    0%
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-bar-container">
+
+            <div class="progress-bar">
+
+                <div
+                        class="progress-fill"
+                        id="progressFill">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Recent Activity
+    ========================== -->
+
+    <section class="activity-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Recent Activity</h2>
+
+                <p>
+                    Track your latest job applications.
+                </p>
+
+            </div>
+
+
+            <button
+                    type="button"
+                    class="add-button"
+                    id="addApplicationButton">
+
+                + Add Application
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             Search / Filter / Sort
+        ========================== -->
+
+        <div class="application-tools">
+
+            <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search company or job title..."
+            >
+
+
+            <select id="filterStatus">
+
+                <option value="ALL">
+                    All Status
+                </option>
+
+                <option value="APPLIED">
+                    Applied
+                </option>
+
+                <option value="ASSESSMENT">
+                    Assessment
+                </option>
+
+                <option value="INTERVIEW">
+                    Interview
+                </option>
+
+                <option value="OFFER">
+                    Offer
+                </option>
+
+                <option value="REJECTED">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <select id="sortApplications">
+
+                <option value="NEWEST">
+                    Newest First
+                </option>
+
+                <option value="OLDEST">
+                    Oldest First
+                </option>
+
+                <option value="COMPANY_ASC">
+                    Company A–Z
+                </option>
+
+                <option value="COMPANY_DESC">
+                    Company Z–A
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =========================
+             Applications List
+        ========================== -->
+
+        <div
+                id="applicationsList"
+                class="applications-list">
+
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Loading applications...</p>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             Add / Edit Application
+        ========================== -->
+
+        <div
+                id="applicationFormContainer"
+                class="application-form-container">
+
+            <div class="form-header">
+
+                <div>
+                    <h2>Add Job Application</h2>
+
+                    <p>
+                        Add the details of a job you applied for.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="applicationForm">
+
+
+                <!-- Company Name -->
+
+                <div class="form-group">
+
+                    <label for="companyName">
+                        Company Name
+                    </label>
+
+                    <input
+                            type="text"
+                            id="companyName"
+                            placeholder="Enter company name"
+                            required
+                    >
+
+                </div>
+
+
+                <!-- Job Title -->
+
+                <div class="form-group">
+
+                    <label for="jobTitle">
+                        Job Title
+                    </label>
+
+                    <input
+                            type="text"
+                            id="jobTitle"
+                            placeholder="Enter job title"
+                            required
+                    >
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Application Status
+                    </label>
+
+                    <select
+                            id="status"
+                            required>
+
+                        <option value="">
+                            Select status
+                        </option>
+
+                        <option value="APPLIED">
+                            Applied
+                        </option>
+
+                        <option value="ASSESSMENT">
+                            Assessment
+                        </option>
+
+                        <option value="INTERVIEW">
+                            Interview
+                        </option>
+
+                        <option value="OFFER">
+                            Offer
+                        </option>
+
+                        <option value="REJECTED">
+                            Rejected
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Applied Date -->
+
+                <div class="form-group">
+
+                    <label for="appliedDate">
+                        Applied Date
+                    </label>
+
+                    <input
+                            type="date"
+                            id="appliedDate"
+                    >
+
+                </div>
+
+
+                <!-- Interview Date -->
+
+                <div
+                        class="form-group"
+                        id="interviewDateGroup">
+
+                    <label for="interviewDate">
+                        Interview Date
+                    </label>
+
+                    <input
+                            type="date"
+                            id="interviewDate"
+                    >
+
+                </div>
+
+
+                <!-- Job Link -->
+
+                <div class="form-group">
+
+                    <label for="jobLink">
+                        Job Link
+                    </label>
+
+                    <input
+                            type="url"
+                            id="jobLink"
+                            placeholder="https://example.com/job"
+                    >
+
+                </div>
+
+
+                <!-- Notes -->
+
+                <div class="form-group full-width">
+
+                    <label for="notes">
+                        Notes
+                    </label>
+
+                    <textarea
+                            id="notes"
+                            placeholder="Add notes about this application..."
+                            rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                        type="submit"
+                        class="save-application-button">
+
+                    Save Application
+
+                </button>
+
+            </form>
+
+
+            <p id="applicationMessage"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Upcoming Interviews
+    ========================== -->
+
+    <section class="interviews-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Upcoming Interviews</h2>
+
+                <p>
+                    Stay prepared for your upcoming interviews.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             Interview Countdown
+        ========================== -->
+
+        <div
+                id="interviewCountdown"
+                class="interview-countdown">
+
+            Loading next interview...
+
+        </div>
+
+
+        <!-- =========================
+             Upcoming Interview List
+        ========================== -->
+
+        <div
+                id="upcomingInterviewsList"
+                class="upcoming-interviews-list">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Application Analytics
+    ========================== -->
+
+    <section class="analytics-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Application Analytics
+                </h2>
+
+                <p>
+                    See how your applications are progressing.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             Success Rate
+        ========================== -->
+
+        <div class="analytics-card">
+
+            <h3>
+                Success Rate
+            </h3>
+
+            <p id="successRate">
+                0%
+            </p>
+
+        </div>
+        <div class="analytics-card">
+            <h3>Total Offers</h3>
+            <p id="totalOffers">0</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Response Rate</h3>
+            <p id="responseRate">0%</p>
+        </div>
+
+        <!-- =========================
+             Application Status Chart
+        ========================== -->
+
+        <div class="chart-container">
+
+            <canvas id="applicationStatusChart"></canvas>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================
+     Chart.js
+========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- =========================
+     CareerTrack Dashboard JavaScript
+========================== -->
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>
+
